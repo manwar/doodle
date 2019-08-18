@@ -6,7 +6,6 @@ use Data::Object 'Role', 'Doodle::Library';
 
 # VERSION
 
-# BUILD
 # METHODS
 
 method binary(Str $name, Any %args) {
