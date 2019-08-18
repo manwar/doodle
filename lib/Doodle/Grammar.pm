@@ -272,7 +272,7 @@ method render_constraint(Relation $rel) {
   my $ftable = $self->wrap($rel->foreign_table);
   my $fcolumn = $self->wrap($rel->foreign_column);
 
-  return "foreign key ($column) references $ftable($fcolumn)";
+  return "foreign key ($column) references $ftable ($fcolumn)";
 }
 
 method render_nullable(Column $col) {
@@ -318,14 +318,18 @@ method render_relation(Command $cmd) {
 
   my $relation = $cmd->relation;
 
-  my $name = $relation->name;
-  my $column = $relation->column;
-  my $ftable = $relation->foreign_table;
-  my $fcolumn = $relation->foreign_column;
+  my $name = $self->wrap($relation->name);
+  my $expr = $self->render_constraint($relation);
 
-  my @args = ($name, $column, $ftable, $fcolumn);
+  my $on_delete = $relation->data->{on_delete};
+  my $on_update = $relation->data->{on_update};
 
-  return sprintf '%s foreign key (%s) references %s (%s)', @args;
+  my @args = ($name, $expr);
+
+  push @args, "on delete $on_delete" if $on_delete;
+  push @args, "on update $on_update" if $on_update;
+
+  return join ' ', @args;
 }
 
 method render_relation_name(Command $cmd) {
