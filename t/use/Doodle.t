@@ -63,6 +63,8 @@ sub context {
   return $s;
 }
 
+# TEST SCHEMA CREATE
+
 my $schema_create = sub {
   my $t = shift;
   my $d = $t->doodle;
@@ -71,19 +73,39 @@ my $schema_create = sub {
   return $s->create;
 };
 
-# TEST SCHEMA CREATE
+my $mysql_schema_create = context('mysql', 'users', $schema_create);
+is $mysql_schema_create->sql,
+  qq{create database `app`};
 
-# my $mysql_schema_create = context('mysql', 'users', $schema_create);
-# is $mysql_schema_create->sql,
-#   qq{create database `app`};
+my $postgres_schema_create = context('postgres', 'users', $schema_create);
+is $postgres_schema_create->sql,
+  qq{create database "app"};
 
-# my $postgres_schema_create = context('postgres', 'users', $schema_create);
-# is $postgres_schema_create->sql,
-#   qq{create database "app"};
+my $mssql_schema_create = context('mssql', 'users', $schema_create);
+is $mssql_schema_create->sql,
+  qq{create database [app]};
 
-# my $mssql_schema_create = context('mssql', 'users', $schema_create);
-# is $mssql_schema_create->sql,
-#   qq{create database [app]};
+# TEST SCHEMA DELETE
+
+my $schema_delete = sub {
+  my $t = shift;
+  my $d = $t->doodle;
+  my $s = $d->schema('app');
+
+  return $s->delete;
+};
+
+my $mysql_schema_delete = context('mysql', 'users', $schema_delete);
+is $mysql_schema_delete->sql,
+  qq{drop database `app`};
+
+my $postgres_schema_delete = context('postgres', 'users', $schema_delete);
+is $postgres_schema_delete->sql,
+  qq{drop database "app"};
+
+my $mssql_schema_delete = context('mssql', 'users', $schema_delete);
+is $mssql_schema_delete->sql,
+  qq{drop database [app]};
 
 # TEST TABLE CREATE
 
