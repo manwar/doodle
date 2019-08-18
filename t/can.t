@@ -96,6 +96,7 @@ sub subroutines {
     render_table
     render_temporary
     render_type
+    render_unique
   );
 
   my @files = map { /^(?:$re)\s+([a-zA-Z]\w+).*\{$/ } source("lib/$path.pm");

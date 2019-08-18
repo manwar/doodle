@@ -151,6 +151,12 @@ method render(Str $str, Command $cmd) {
   return $output;
 }
 
+method render_unique(Command $cmd) {
+  # render index "unique" clause
+
+  return $cmd->indices->first->data->{unique} ? 'unique' : undef;
+}
+
 method render_temporary(Command $cmd) {
   # render table "temporary" clause
 
