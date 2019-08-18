@@ -93,6 +93,7 @@ sub subroutines {
     render_primary
     render_relation
     render_relation_name
+    render_schema_name
     render_table
     render_temporary
     render_type
