@@ -377,6 +377,7 @@ sub subs {
     render_constraint
     render_constraints
     render_if_exists
+    render_if_not_exists
     render_increments
     render_index_columns
     render_index_name

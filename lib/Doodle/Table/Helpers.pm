@@ -232,6 +232,18 @@ method temporary() {
   return $self;
 }
 
+method if_exists() {
+  $self->data->{if_exists} = 1;
+
+  return $self;
+}
+
+method if_not_exists() {
+  $self->data->{if_not_exists} = 1;
+
+  return $self;
+}
+
 method text(Str $name, Any %args) {
   my $column = $self->column($name);
 
