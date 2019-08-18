@@ -288,4 +288,16 @@ method delete_relation(Command $cmd) {
   return $self->render($s, $cmd);
 }
 
+method create_schema(Command $cmd) {
+  my $s ='create database {if_not_exists} {schema_name}';
+
+  return $self->render($s, $cmd);
+}
+
+method delete_schema(Command $cmd) {
+  my $s ='drop database {if_exists} {schema_name}';
+
+  return $self->render($s, $cmd);
+}
+
 1;

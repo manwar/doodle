@@ -4,6 +4,8 @@ use 5.014;
 
 use Data::Object 'Class', 'Doodle::Library';
 
+with 'Doodle::Schema::Helpers';
+
 use Doodle::Table;
 
 # VERSION
@@ -40,6 +42,19 @@ has temporary => (
   isa => 'Bool',
 );
 
+has data => (
+  is => 'ro',
+  isa => 'Data',
+  bld => 'new_data',
+  lzy => 1
+);
+
+# BUILD
+
+fun new_data($self) {
+  return do('hash', {});
+}
+
 # METHODS
 
 method table(Str $name, Any %args) {
@@ -61,7 +76,7 @@ method create(Any %args) {
 method delete(Any %args) {
   $args{schema} = $self;
 
-  my $command = $self->doodle->schema_create(%args);
+  my $command = $self->doodle->schema_delete(%args);
 
   return $command;
 }

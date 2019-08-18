@@ -164,19 +164,29 @@ method render_temporary(Command $cmd) {
 }
 
 method render_if_exists(Command $cmd) {
-  # render table "if exists" clause
+  # render schema/table "if exists" clause
 
-  return 'if exists' if $cmd->table->data->{if_exists};
+  my $source = $cmd->name =~ /schema/ ? $cmd->schema : $cmd->table;
+
+  return 'if exists' if $source->data->{if_exists};
 
   return undef;
 }
 
 method render_if_not_exists(Command $cmd) {
-  # render table "if exists" clause
+  # render schema/table "if exists" clause
 
-  return 'if not exists' if $cmd->table->data->{if_not_exists};
+  my $source = $cmd->name =~ /schema/ ? $cmd->schema : $cmd->table;
+
+  return 'if not exists' if $source->data->{if_not_exists};
 
   return undef;
+}
+
+method render_schema_name(Command $cmd) {
+  # render schema name
+
+  return $self->wrap($cmd->schema->name);
 }
 
 method render_table(Command $cmd) {
