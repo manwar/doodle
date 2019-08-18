@@ -58,6 +58,21 @@ has data => (
   lzy => 1
 );
 
+has engine => (
+  is => 'rw',
+  isa => 'Str'
+);
+
+has charset => (
+  is => 'rw',
+  isa => 'Str'
+);
+
+has collation => (
+  is => 'rw',
+  isa => 'Str'
+);
+
 # BUILD
 
 fun new_data($self) {

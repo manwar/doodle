@@ -147,19 +147,19 @@ my $relations = sub {
 
 my $sqlite_relations = context('sqlite', 'users', $relations);
 is $sqlite_relations->sql,
-  qq{create table "users" ("profile_id" integer not null, foreign key ("profile_id") references "profiles"("id"))};
+  qq{create table "users" ("profile_id" integer not null, foreign key ("profile_id") references "profiles" ("id"))};
 
 my $mysql_relations = context('mysql', 'users', $relations);
 is $mysql_relations->sql,
-  qq{create table `users` (`profile_id` int not null, foreign key (`profile_id`) references `profiles`(`id`))};
+  qq{create table `users` (`profile_id` int not null, foreign key (`profile_id`) references `profiles` (`id`))};
 
 my $postgres_relations = context('postgres', 'users', $relations);
 is $postgres_relations->sql,
-  qq{create table "users" ("profile_id" integer not null, foreign key ("profile_id") references "profiles"("id"))};
+  qq{create table "users" ("profile_id" integer not null, foreign key ("profile_id") references "profiles" ("id"))};
 
 my $mssql_relations = context('mssql', 'users', $relations);
 is $mssql_relations->sql,
-  qq{create table [users] ([profile_id] int not null, foreign key ([profile_id]) references [profiles]([id]))};
+  qq{create table [users] ([profile_id] int not null, foreign key ([profile_id]) references [profiles] ([id]))};
 
 # TEST TABLE DELETE
 

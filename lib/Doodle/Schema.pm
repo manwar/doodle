@@ -10,25 +10,10 @@ use Doodle::Table;
 
 # VERSION
 
-has charset => (
-  is => 'ro',
-  isa => 'Str',
-);
-
-has collation => (
-  is => 'ro',
-  isa => 'Str',
-);
-
 has doodle => (
   is => 'ro',
   isa => 'Doodle',
   req => 1
-);
-
-has engine => (
-  is => 'ro',
-  isa => 'Str',
 );
 
 has name => (

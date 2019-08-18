@@ -15,21 +15,6 @@ has name => (
   def => 'unknown'
 );
 
-has engine => (
-  is => 'ro',
-  isa => 'Str'
-);
-
-has charset => (
-  is => 'ro',
-  isa => 'Str'
-);
-
-has collation => (
-  is => 'ro',
-  isa => 'Str'
-);
-
 # METHODS
 
 method exception(Str $msg) {
@@ -336,6 +321,30 @@ method render_relation_name(Command $cmd) {
   # render table create foreign key name
 
   return $self->wrap($cmd->relation->name);
+}
+
+method render_engine(Command $cmd) {
+  # render engine
+
+  my $engine =  $cmd->table->engine;
+
+  return return $engine ? "engine = $engine" : undef;
+}
+
+method render_charset(Command $cmd) {
+  # render charset
+
+  my $charset = $cmd->table->charset;
+
+  return $charset ? "character set $charset" : undef;
+}
+
+method render_collation(Command $cmd) {
+  # render collation
+
+  my $collation = $cmd->table->collation;
+
+  return $collation ? "collate $collation" : undef;
 }
 
 1;
