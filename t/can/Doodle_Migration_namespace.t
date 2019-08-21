@@ -34,14 +34,14 @@ method
 
 use lib 't/lib';
 
-use My::Migrator;
-use Doodle::Migrator;
+use My::Migration;
+use Doodle::Migration;
 
-can_ok "Doodle::Migrator", "namespace";
+can_ok "Doodle::Migration", "namespace";
 
-my $migrator = My::Migrator->new;
+my $migrator = My::Migration->new;
 
-isa_ok $migrator, 'Doodle::Migrator';
+isa_ok $migrator, 'Doodle::Migration';
 
 is $migrator->namespace, 'My::Migration';
 
