@@ -37,7 +37,7 @@ Doodle Relation Class
 
 =head1 DESCRIPTION
 
-Table relation representation.
+This package provides a representation of a table relation.
 
 =cut
 
