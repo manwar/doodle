@@ -8,7 +8,7 @@ use Data::Object 'Class', 'Doodle::Library';
 
 has name => (
   is => 'ro',
-  isa => 'Any',
+  isa => 'Str',
   bld => 'new_name',
   lzy => 1
 );
@@ -34,7 +34,7 @@ has data => (
 # BUILD
 
 fun new_data($self) {
-  return do('hash', {});
+  return {};
 }
 
 fun new_name($self) {
@@ -62,7 +62,7 @@ method create(Any %args) {
 
   $args{table} = $table;
   $args{schema} = $table->schema if $table->schema;
-  $args{indices} = do('array', [$self]);
+  $args{indices} = [$self];
 
   my $command = $self->doodle->index_create(%args);
 
@@ -74,7 +74,7 @@ method delete(Any %args) {
 
   $args{table} = $table;
   $args{schema} = $table->schema if $table->schema;
-  $args{indices} = do('array', [$self]);
+  $args{indices} = [$self];
 
   my $command = $self->doodle->index_delete(%args);
 

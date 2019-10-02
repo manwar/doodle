@@ -224,6 +224,12 @@ method not_null(Any %args) {
   return $self;
 }
 
+method references(Str $ftable, Str @args) {
+  my $table = $self->table;
+
+  return $table->relation($self->name, $ftable, @args);
+}
+
 method string(Any %args) {
   $self->type('string');
 

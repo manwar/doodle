@@ -10,7 +10,7 @@ with 'Doodle::Column::Helpers';
 
 has name => (
   is => 'ro',
-  isa => 'Any',
+  isa => 'Str',
   req => 1
 );
 
@@ -29,17 +29,24 @@ has type => (
 has data => (
   is => 'ro',
   isa => 'Data',
-  bld => 'new_data',
-  lzy => 1
+  new => 1
 );
 
 # BUILD
 
 fun new_data($self) {
-  return do('hash', {});
+  return {};
 }
 
 # METHODS
+
+method BUILD($args) {
+  for my $key (keys %$args) {
+    $self->{data}{$key} = $args->{$key} if !$self->can($key);
+  }
+
+  return $self;
+}
 
 method doodle() {
   my $doodle = $self->table->doodle;
@@ -52,7 +59,7 @@ method create(Any %args) {
 
   $args{table} = $table;
   $args{schema} = $table->schema if $table->schema;
-  $args{columns} = do('array', [$self]);
+  $args{columns} = [$self];
 
   my $command = $self->doodle->column_create(%args);
 
@@ -64,7 +71,7 @@ method update(Any %args) {
 
   $args{table} = $table;
   $args{schema} = $table->schema if $table->schema;
-  $args{columns} = do('array', [$self]);
+  $args{columns} = [$self];
 
   $self->data->set(drop => delete $args{drop}) if $args{drop};
   $self->data->set(set => delete $args{set}) if $args{set};
@@ -79,7 +86,7 @@ method delete(Any %args) {
 
   $args{table} = $table;
   $args{schema} = $table->schema if $table->schema;
-  $args{columns} = do('array', [$self]);
+  $args{columns} = [$self];
 
   my $command = $self->doodle->column_delete(%args);
 
@@ -91,7 +98,7 @@ method rename(Str $name, Any %args) {
 
   $args{table} = $table;
   $args{schema} = $table->schema if $table->schema;
-  $args{columns} = do('array', [$self]);
+  $args{columns} = [$self];
 
   $self->data->{to} = $name;
 

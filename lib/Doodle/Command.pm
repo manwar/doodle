@@ -67,10 +67,10 @@ method BUILDARGS(%args) {
     $data->{$name} = delete $args{$name} if exists $args{$name};
   }
 
-  $data->{columns} = do('array', $data->{columns}) if $data->{columns};
-  $data->{indices} = do('array', $data->{indices}) if $data->{indices};
+  $data->{columns} = $data->{columns} if $data->{columns};
+  $data->{indices} = $data->{indices} if $data->{indices};
 
-  $data->{data} = do('hash', {%args}) if !$data->{data};
+  $data->{data} = {%args} if !$data->{data};
 
   return $data;
 }

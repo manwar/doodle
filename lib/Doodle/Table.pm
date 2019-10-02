@@ -33,29 +33,25 @@ has schema => (
 has columns => (
   is => 'ro',
   isa => 'Columns',
-  bld => 'new_columns',
-  lzy => 1
+  new => 1
 );
 
 has indices => (
   is => 'ro',
   isa => 'Indices',
-  bld => 'new_indices',
-  lzy => 1
+  new => 1
 );
 
 has relations => (
   is => 'ro',
   isa => 'Relations',
-  bld => 'new_relations',
-  lzy => 1
+  new => 1
 );
 
 has data => (
   is => 'ro',
   isa => 'Data',
-  bld => 'new_data',
-  lzy => 1
+  new => 1
 );
 
 has engine => (
@@ -76,19 +72,19 @@ has collation => (
 # BUILD
 
 fun new_data($self) {
-  return do('hash', {});
+  return {};
 }
 
 fun new_columns($self) {
-  return do('array', []);
+  return [];
 }
 
 fun new_indices($self) {
-  return do('array', []);
+  return [];
 }
 
 fun new_relations($self) {
-  return do('array', []);
+  return [];
 }
 
 # METHODS
