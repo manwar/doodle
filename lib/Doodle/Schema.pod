@@ -29,7 +29,7 @@ Doodle Schema Class
 
 =head1 DESCRIPTION
 
-Database representation.
+This package provides a representation of a database.
 
 =cut
 

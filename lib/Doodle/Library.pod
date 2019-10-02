@@ -22,7 +22,7 @@ Doodle Type Library
 =head1 DESCRIPTION
 
 Doodle::Library is the L<Doodle> type library derived from
-L<Data::Object::Library> which is a L<Type::Library>
+L<Data::Object::Library> which is a L<Type::Library>.
 
 =cut
 
@@ -30,7 +30,7 @@ L<Data::Object::Library> which is a L<Type::Library>
 
 This package uses type constraints from:
 
-L<Doodle::Library>
+L<Data::Object::Library>
 
 =cut
 
