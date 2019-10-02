@@ -17,6 +17,10 @@ has name => (
 
 # METHODS
 
+method wrap(Str $arg) {
+  return $arg;
+}
+
 method exception(Str $msg) {
   my $engine = ucfirst $self->name;
 

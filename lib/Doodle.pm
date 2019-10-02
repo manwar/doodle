@@ -17,14 +17,13 @@ use Doodle::Table;
 has commands => (
   is => 'ro',
   isa => 'Commands',
-  bld => 'new_commands',
-  lzy => 1
+  new => 1
 );
 
 # BUILD
 
 fun new_commands($self) {
-  return do('array', []);
+  return [];
 }
 
 # METHODS
@@ -46,7 +45,7 @@ method schema(Str $name, Any %args) {
 }
 
 method statements(Grammar $grammar) {
-  my $statements = do('array', []);
+  my $statements = [];
 
   for my $command ($self->commands->list) {
     $statements->push($grammar->execute($command));

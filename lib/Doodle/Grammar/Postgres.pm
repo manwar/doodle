@@ -4,6 +4,8 @@ use 5.014;
 
 use Data::Object 'Class', 'Doodle::Library';
 
+use Scalar::Util ();
+
 extends 'Doodle::Grammar';
 
 # VERSION
@@ -80,7 +82,10 @@ method type_enum(Column $col) {
   my $options = $col->data->{options};
 
   $name = $self->wrap($name);
-  $options = join ', ', map $self->wrap($_), @$options;
+
+  $options = join ', ',
+    map Scalar::Util::looks_like_number($_)
+      ? $_ : do{ s/'/\\'/g; "'$_'" }, @$options;
 
   return "varchar(225) check ($name in ($options))";
 }

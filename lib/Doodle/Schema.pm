@@ -30,14 +30,13 @@ has temporary => (
 has data => (
   is => 'ro',
   isa => 'Data',
-  bld => 'new_data',
-  lzy => 1
+  new => 1
 );
 
 # BUILD
 
 fun new_data($self) {
-  return do('hash', {});
+  return {};
 }
 
 # METHODS
