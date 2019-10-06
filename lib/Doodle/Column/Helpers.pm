@@ -65,6 +65,32 @@ method decimal(Any %args) {
   return $self;
 }
 
+method default(Str @args) {
+  unshift @args, 'deduce' if @args == 1;
+
+  $self->data->set(default => [@args]);
+
+  return $self;
+}
+
+method default_current_date() {
+  $self->default(function => 'CURRENT_DATE');
+
+  return $self;
+}
+
+method default_current_time() {
+  $self->default(function => 'CURRENT_TIME');
+
+  return $self;
+}
+
+method default_current_datetime() {
+  $self->default(function => 'CURRENT_TIMESTAMP');
+
+  return $self;
+}
+
 method double(Any %args) {
   $self->type('double');
 
