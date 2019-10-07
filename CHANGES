@@ -1,6 +1,11 @@
 Changelog for Doodle
 
-0.06 2019-10-02T05:17:59
+0.07 2019-10-06T21:05:56
+ - Added release updates
+ - Added Support for Column Default Value (#16)
+
+0.06 2019-10-02T05:18:01
+ - Built release version 0.06
  - Added release updates
  - Refactor Tests and Fixed CPAN Issues (#13)
 
